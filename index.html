@@ -3456,8 +3456,7 @@ function calcularPerfilCompleto(p){
 
 async function cargarDash(){
   miPerfil=loadLocal('miPerfil');
-  
-  // Mostrar bottombar
+
   var bb=document.getElementById('bottombar');
   if(bb) bb.classList.add('show');
 
@@ -3466,55 +3465,65 @@ async function cargarDash(){
     return;
   }
 
-  // REDIRECCIÓN ELIMINADA - v11.5 TODO INTEGRADO EN SPA
-  var esPremium = miPerfil.plan === 'premium' || miPerfil.plan === 'pro';
-  
-  // Limpiar placeholders de prueba
-  if(!miPerfil.nombre || miPerfil.nombre.includes('Verónica')) {
-     // Si es un perfil de prueba o vacío, intentamos recuperar del login real
-     let googleUser = JSON.parse(localStorage.getItem('mm_googleUser') || '{}');
-     if(googleUser.name) miPerfil.nombre = googleUser.name;
-  }
-
-  // Dashboard Loader
+  // IDENTIDAD REAL v11.6
   var avatar = document.getElementById('ph-avatar');
   var name = document.getElementById('ph-name');
-  var metaExec = document.getElementById('ph-meta-exec');
-  var coverImg = document.getElementById('ph-cover-img');
+  var meta = document.getElementById('ph-meta');
+  var badge = document.getElementById('ph-badge');
 
-  if(avatarExec) {
+  if(name) name.innerHTML = (miPerfil.nombre || 'Profesional') + (miPerfil.verificado ? ' <span class="text-blue-400">✓</span>' : '');
+  if(meta) meta.textContent = ((miPerfil.oficios || []).join(' & ')) || 'Especialista MasterMatch';
+  if(badge) badge.textContent = miPerfil.plan === 'premium' ? '👑' : miPerfil.plan === 'pro' ? '⭐' : '👤';
+
+  if(avatar) {
     if(miPerfil.fotoPerfil) {
-      avatarExec.style.backgroundImage = 'url('+miPerfil.fotoPerfil+')';
-      avatarExec.textContent = '';
+      avatar.style.backgroundImage = 'url('+miPerfil.fotoPerfil+')';
+      avatar.textContent = '';
     } else {
-      avatarExec.style.background = 'var(--surface)';
-      avatarExec.textContent = (miPerfil.nombre||'P').charAt(0);
+      avatar.style.background = 'linear-gradient(135deg, var(--o) 0%, #003D3D 100%)';
+      avatar.textContent = (miPerfil.nombre || 'P').charAt(0);
+      avatar.style.display = 'flex';
+      avatar.style.alignItems = 'center';
+      avatar.style.justifyContent = 'center';
+      avatar.style.color = '#fff';
+      avatar.style.fontSize = '2rem';
     }
   }
 
-  if(coverImg && miPerfil.fotoPortada) coverImg.src = miPerfil.fotoPortada;
+  // MÉTRICAS (IDs Clásicos)
+  var mSols = document.getElementById('bc-sols');
+  var mBill = document.getElementById('bc-billetera');
+  var mRate = document.getElementById('bc-rating');
+  var mProg = document.getElementById('bc-completo');
 
-  var plan = miPerfil.plan||'gratis';
-  var badge = plan==='premium'?'👑':plan==='pro'?'⭐':'👤';
-  var badgeEl = document.getElementById('ph-badge-exec');
-  if(badgeEl) badgeEl.textContent = badge;
+  if(mSols) mSols.textContent = (miPerfil.matchsActivos || 0);
+  if(mBill) mBill.textContent = '$' + (miPerfil.saldoEscrow || 0).toLocaleString('es-CL');
+  if(mRate) mRate.textContent = (miPerfil.rating || '4.98');
+  if(mProg) mProg.textContent = (miPerfil.progresoPerfil || '85') + '%';
 
-  if(nameExec) nameExec.innerHTML = (miPerfil.nombre||'Profesional') + (miPerfil.verificado ? ' <span class="text-blue-400">✓</span>' : '');
-  if(metaExec) metaExec.textContent = ((miPerfil.oficios||[]).join(' & ')) || 'Profesional';
+  // DEFAULT VIEW - Desbloquea el panel
+  irSeccion('oportunidades');
+}
 
-  // METRICS
-  var mMatchs = document.getElementById('m-matchs');
-  var mBilletera = document.getElementById('m-billetera');
-  var mRating = document.getElementById('m-rating');
-  var mVerif = document.getElementById('m-verif-status');
+function irSeccion(id){
+  // Ocultar todas las sub-secciones
+  document.querySelectorAll('.dash-sec').forEach(function(s){ s.style.display='none'; });
 
-  if(mMatchs) mMatchs.textContent = (miPerfil.matchsActivos||0);
-  if(mBilletera) mBilletera.textContent = '$'+(miPerfil.saldoEscrow||0).toLocaleString('es-CL');
-  if(mRating) mRating.textContent = (miPerfil.rating||'4.98');
-  if(mVerif) mVerif.textContent = miPerfil.verificado ? '✓ Perfil Verificado' : 'Revisión automática';
+  // Mostrar la seleccionada (compatibilidad con IDs antiguos y nuevos)
+  var target = document.getElementById('sec-' + id) || document.getElementById(id + '-content');
+  if(target) target.style.display = 'block';
 
-  // DEFAULT VIEW
-  irSeccion('perfil');
+  // Actualizar menú activo
+  document.querySelectorAll('.side-item, .nav-btn').forEach(function(b){
+    b.classList.remove('active');
+    if(b.getAttribute('data-sec') === id) b.classList.add('active');
+  });
+
+  // Ejecutar carga de datos de la sección
+  if(id==='oportunidades') cargarOportunidades();
+  if(id==='perfil') cargarMiPerfil();
+  if(id==='agenda') cargarAgenda();
+}
   cargarSolicitudesExec();
 }
 
