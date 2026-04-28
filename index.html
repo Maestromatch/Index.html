@@ -3466,18 +3466,19 @@ async function cargarDash(){
     return;
   }
 
-  // REDIRECCIÓN A EXECUTIVE DASHBOARD v11.0
-  // Si el usuario es Premium o Pro, lo enviamos al archivo especializado si estamos en index
+  // REDIRECCIÓN ELIMINADA - v11.5 TODO INTEGRADO EN SPA
   var esPremium = miPerfil.plan === 'premium' || miPerfil.plan === 'pro';
-  if(esPremium && window.location.pathname.indexOf('dashboard-executive') === -1) {
-    console.log('Redirigiendo a Executive Dashboard...');
-    window.location.href = 'dashboard-executive.html';
-    return;
+  
+  // Limpiar placeholders de prueba
+  if(!miPerfil.nombre || miPerfil.nombre.includes('Verónica')) {
+     // Si es un perfil de prueba o vacío, intentamos recuperar del login real
+     let googleUser = JSON.parse(localStorage.getItem('mm_googleUser') || '{}');
+     if(googleUser.name) miPerfil.nombre = googleUser.name;
   }
 
-  // EXECUTIVE HEADER UPDATE (Solo si los elementos existen en el DOM actual)
-  var avatarExec = document.getElementById('ph-avatar-exec');
-  var nameExec = document.getElementById('ph-name-exec');
+  // Dashboard Loader
+  var avatar = document.getElementById('ph-avatar');
+  var name = document.getElementById('ph-name');
   var metaExec = document.getElementById('ph-meta-exec');
   var coverImg = document.getElementById('ph-cover-img');
 
