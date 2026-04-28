@@ -2019,36 +2019,99 @@ input:checked+.slider:before{transform:translateX(20px)}
   </div>
 </div>
 
-<!-- BLOG DE PRECIOS -->
-<div id="s-blog" class="screen" style="background:var(--bg-deep);min-height:100vh">
-  <!-- Hero dark del blog -->
-  <div style="background:linear-gradient(135deg,#0C0F10 0%,#003D3D 100%);padding:1.5rem 1.5rem 2rem;position:relative;overflow:hidden">
-    <div style="position:absolute;top:-60px;right:-60px;width:250px;height:250px;background:radial-gradient(circle,rgba(0,201,177,.12) 0%,transparent 70%);pointer-events:none"></div>
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
-      <button onclick="go('home')" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;padding:7px 14px;border-radius:100px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit">← Volver</button>
-      <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;color:rgba(255,255,255,.5)">Master<span style="color:var(--o)">Match</span></div>
-    </div>
-    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(0,201,177,.1);border:1px solid rgba(0,201,177,.2);border-radius:100px;padding:5px 14px;font-size:11px;color:var(--o);font-weight:600;letter-spacing:.05em;margin-bottom:12px">💡 GUÍA DE PRECIOS 2026</div>
-    <h1 style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:26px;color:#fff;letter-spacing:-0.02em;margin-bottom:8px">Precios referenciales</h1>
-    <p style="font-size:13px;color:rgba(255,255,255,.6);line-height:1.55;margin-bottom:1.25rem">Basados en análisis del mercado chileno de servicios. Actualizados 2026. Ajustados por región.</p>
-    <!-- Selector de región -->
-    <div style="display:flex;gap:8px;flex-wrap:wrap">
-      <button class="blog-rpick sel" onclick="blogRegion('Metropolitana',this)">🏙️ RM</button>
-      <button class="blog-rpick" onclick="blogRegion('Valparaiso',this)">🌊 Valparaíso</button>
-      <button class="blog-rpick" onclick="blogRegion('Biobio',this)">🌲 Biobío</button>
-      <button class="blog-rpick" onclick="blogRegion('LosRios',this)">🌳 Los Ríos</button>
-      <button class="blog-rpick" onclick="blogRegion('LosLagos',this)">🏞️ Los Lagos</button>
-    </div>
-    <!-- CTA Blog Premium -->
-    <div style="margin-top:1.25rem;background:linear-gradient(135deg,rgba(201,168,76,.15) 0%,rgba(201,168,76,.05) 100%);border:1px solid rgba(201,168,76,.3);border-radius:12px;padding:1rem;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap" id="blog-premium-cta">
-      <div>
-        <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:3px">💎 Blog Premium exclusivo</div>
-        <div style="font-size:12px;color:rgba(255,255,255,.55)">Tendencias, tips, estrategias y guías completas para profesionales y clientes.</div>
+<!-- =================================================================
+     DASHBOARD EXECUTIVE (v11.0 INTEGRADO)
+     ================================================================= -->
+<div id="s-dash-exec" class="screen" style="background:var(--bg-deep);padding-bottom:80px">
+  <div class="max-w-6xl mx-auto min-h-screen">
+    <header class="relative group">
+      <div class="h-48 md:h-72 w-full overflow-hidden relative">
+        <img id="ph-cover-img" src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover">
+        <div class="absolute inset-0" style="background:linear-gradient(180deg, rgba(10,10,12,0) 0%, rgba(10,10,12,0.9) 100%)"></div>
+        <nav class="absolute bottom-0 left-0 w-full hidden md:block px-8 py-4 bg-black/20 backdrop-blur-sm">
+          <div class="flex items-center justify-end space-x-8 text-sm font-semibold tracking-wide uppercase">
+            <a onclick="go('dash')" class="text-white hover:text-[var(--o)] cursor-pointer">Dashboard</a>
+            <a onclick="go('chat-match')" class="text-white hover:text-[var(--o)] cursor-pointer">Solicitudes</a>
+            <a onclick="go('planes')" class="text-white hover:text-[var(--o)] cursor-pointer">Billetera</a>
+            <a onclick="go('blog')" class="text-white hover:text-[var(--o)] cursor-pointer">Guía 2026</a>
+            <a onclick="go('perfil')" class="flex items-center gap-2 px-4 py-2 bg-[var(--o)] text-black rounded-sm hover:bg-white transition cursor-pointer">
+              <i class="fas fa-shield-alt"></i> Verificación Legal
+            </a>
+          </div>
+        </nav>
       </div>
-      <button onclick="go('blog-premium')" style="background:var(--gold);color:#fff;border:none;border-radius:10px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap">Ver Blog →</button>
+      <div class="absolute -bottom-16 left-6 md:left-12 flex items-end gap-4 md:gap-6">
+        <div class="relative">
+          <div id="ph-avatar-exec" class="w-24 h-24 md:w-40 md:h-40 rounded-sm object-cover profile-ring bg-black flex items-center justify-center text-4xl font-bold" style="background-size:cover;background-position:center;border:3px solid var(--o);box-shadow:0 0 15px rgba(201,168,76,0.3)"></div>
+          <div class="absolute -top-2 -right-2 bg-[var(--o)] p-1 rounded-full shadow-lg" id="ph-badge-exec">👑</div>
+        </div>
+        <div class="mb-4">
+          <h1 id="ph-name-exec" class="text-2xl md:text-4xl font-bold flex items-center gap-2 text-white">Profesional</h1>
+          <p id="ph-meta-exec" class="text-[var(--o)] font-medium tracking-widest text-xs md:text-sm uppercase">Especialista MasterMatch</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="mt-20 px-6 md:px-12 pb-12">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+        <div class="premium-card p-6 rounded-sm bg-[var(--surface)] border border-[var(--border)]">
+          <span class="text-xs text-gray-500 uppercase tracking-tighter">Matchs Activos</span>
+          <div id="m-matchs" class="text-3xl font-bold mt-1 text-white">0</div>
+          <div class="text-xs text-green-500 mt-2 flex items-center gap-1">↑ Actividad Óptima</div>
+        </div>
+        <div class="premium-card p-6 rounded-sm bg-[var(--surface)] border border-[var(--border)] border-l-4 border-l-[var(--o)]">
+          <span class="text-xs text-gray-500 uppercase tracking-tighter">Billetera (Escrow)</span>
+          <div id="m-billetera" class="text-3xl font-bold mt-1 font-mono text-[var(--o)]">$0</div>
+          <div class="text-xs text-gray-400 mt-2 italic">Pagos protegidos</div>
+        </div>
+        <div class="premium-card p-6 rounded-sm bg-[var(--surface)] border border-[var(--border)]">
+          <span class="text-xs text-gray-500 uppercase tracking-tighter">Reputación Legal</span>
+          <div id="m-rating" class="text-3xl font-bold mt-1 text-blue-400">4.98</div>
+          <div id="m-verif-status" class="text-xs text-gray-400 mt-2">Verificación v11.0</div>
+        </div>
+        <div class="premium-card p-6 rounded-sm bg-[var(--surface)] border border-[var(--border)]">
+          <span class="text-xs text-gray-500 uppercase tracking-tighter">Vistas Perfil</span>
+          <div class="text-3xl font-bold mt-1 text-white">2,4k</div>
+          <div class="text-xs text-gray-400 mt-2">Alcance nacional</div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12">
+        <div class="lg:col-span-2">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-xl font-bold text-white">Solicitudes Recientes</h3>
+            <a onclick="go('chat-match')" class="text-sm text-[var(--o)] hover:underline cursor-pointer">Ver todas</a>
+          </div>
+          <div id="solicitudes-exec-list" class="space-y-4"></div>
+        </div>
+        <div class="space-y-6">
+          <h3 class="text-xl font-bold text-white">Contenido Elite</h3>
+          <div class="premium-card overflow-hidden rounded-sm bg-[var(--surface)] border border-[var(--border)]">
+            <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=2070&auto=format&fit=crop" class="w-full h-32 object-cover">
+            <div class="p-4">
+              <span class="text-[10px] bg-[var(--o)] text-black px-2 py-0.5 font-bold uppercase">Plan Premium</span>
+              <h4 class="font-bold mt-2 text-white">Guía de Precios 2026</h4>
+              <p class="text-xs text-gray-400 mt-1">Valores actualizados para Construcción y Oficios en Chile.</p>
+              <button onclick="go('blog')" class="mt-4 w-full py-2 border border-[var(--o)] text-[var(--o)] text-xs font-bold hover:bg-[var(--o)] hover:text-black transition uppercase tracking-widest">Ver Guía Completa</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- BLOG DE PRECIOS UNIFICADO -->
+<div id="s-blog" class="screen" style="background:var(--bg-deep);min-height:100vh;padding-bottom:100px">
+  <div style="background:linear-gradient(135deg,#0C0F10 0%,#003D3D 100%);padding:2rem 1.5rem 3rem;position:relative;overflow:hidden;text-align:center">
+    <div style="position:absolute;top:-60px;right:-60px;width:250px;height:250px;background:radial-gradient(circle,rgba(0,201,177,.12) 0%,transparent 70%);pointer-events:none"></div>
+    <div style="position:relative;z-index:2">
+      <button onclick="go('home')" style="position:absolute;left:0;top:-10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;padding:7px 14px;border-radius:100px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit">← Inicio</button>
+      <h1 style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:32px;color:#fff;margin-bottom:8px">Guía & Blog Premium</h1>
+      <p style="color:var(--o);font-weight:600;letter-spacing:1px;font-size:12px;text-transform:uppercase">Precios Referenciales 2026 Chile</p>
     </div>
   </div>
-  <div style="padding:1.25rem 1.5rem 3rem;max-width:960px;margin:0 auto">
+  <div style="padding:1.5rem;max-width:960px;margin:-2rem auto 0;position:relative;z-index:3">
     <div id="blog-content"></div>
   </div>
 </div>
