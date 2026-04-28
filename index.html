@@ -893,17 +893,62 @@ input:checked+.slider:before{transform:translateX(20px)}
 </div>
 
 <script>
-// SEGURO DE CARGA v12.1
+/* ============ NAVEGACIÓN CORE v12.3.1 ============ */
+let appHistory = ['home'];
+
+function go(id) {
+    console.log('Navegando a:', id);
+    if (!id) return;
+    
+    // Ocultar todas las pantallas
+    document.querySelectorAll('.screen').forEach(x => {
+        x.classList.remove('active');
+        x.style.display = 'none';
+    });
+    
+    // Mostrar la pantalla objetivo
+    const el = document.getElementById('s-' + id);
+    if (el) {
+        el.classList.add('active');
+        el.style.display = 'block';
+        window.scrollTo(0, 0);
+        
+        // Ejecutar cargas específicas
+        if (id === 'dash') cargarDash();
+        if (id === 'home') cargarStats();
+        if (id === 'explorar') cargarExplorar();
+        if (id === 'blog') cargarBlog();
+    } else {
+        console.error('Pantalla no encontrada:', id);
+    }
+}
+
+// SEGURO DE CARGA: Ocultar splash y habilitar interacción
 function ocultarSplashManual() {
   const s = document.getElementById('splash');
   if(s) {
     s.style.opacity = '0';
-    setTimeout(() => { s.style.display = 'none'; s.classList.add('hidden'); }, 800);
+    s.style.pointerEvents = 'none';
+    setTimeout(() => { s.style.display = 'none'; }, 600);
   }
 }
-// Fallback automático a los 3 segundos
-setTimeout(ocultarSplashManual, 3000);
 </script>
+
+<style>
+/* SEO & LAYOUT FIX v12.3.1 */
+.hero { 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center;
+  padding: 100px 20px 60px;
+  text-align: center;
+  min-height: 80vh;
+}
+.htitle { font-size: clamp(2rem, 8vw, 4rem); margin-bottom: 20px; line-height: 1; }
+.hsub { font-size: 1.1rem; color: #94A3B8; max-width: 650px; margin-bottom: 40px; }
+.hero-btns { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; z-index: 100; position: relative; }
+</style>
 <!-- POPUP DE BIENVENIDA v10.8 — solo primera visita -->
 <div id="welcome-popup" style="display:none;position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:1.5rem">
   <div style="background:linear-gradient(145deg,#0C0F10 0%,#111518 50%,#0C1714 100%);border:1px solid rgba(0,201,177,.2);border-radius:20px;padding:2rem 1.75rem;max-width:420px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 40px rgba(0,201,177,.06);position:relative;animation:popupIn .5s cubic-bezier(.34,1.56,.64,1)">
