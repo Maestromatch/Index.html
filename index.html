@@ -28,111 +28,65 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* Paleta MasterMatch v12.3.1 — Executive Dark (Refined by CKMDesign) */
-  --bg-deep: #080A0B;      /* Capa 0: Fondo base */
-  --surface: #111418;      /* Capa 1: Secciones elevadas */
-  --surface-2: #1A1E23;    /* Capa 2: Tarjetas y modales */
-  --border: rgba(255,255,255,0.06);
-  --o: #00A38E;            /* Turquesa Esmeralda Mate (más elegante) */
-  --gold: #C9A84C;         /* Oro para Premium */
-  --mu: #94A3B8;           /* Gris azulado (Texto secundario) */
-  --text-white: #FFFFFF;
+  /* Paleta MasterMatch v12.3.1 — Executive Dark (Clean) */
+  --bg-deep: #080A0B;      /* Fondo base */
+  --surface: #121519;      /* Capa 1: Secciones */
+  --surface-2: #1A1E23;    /* Capa 2: Tarjetas */
+  --border: rgba(255,255,255,0.08);
+  --o: #00A38E;            /* Esmeralda Mate */
+  --gold: #C9A84C;         /* Oro */
+  --mu: #94A3B8;           /* Texto secundario */
+  --text-main: #FFFFFF;    /* Texto principal */
 
-  /* Diseño de Interacción */
-  --focus-ring: 0 0 0 3px rgba(0, 163, 142, 0.3);
-  
-  /* Mapeo de compatibilidad */
-  --dark-bg: var(--bg-deep);
-  --color-primary: var(--o);
-  --color-gold: var(--gold);
-  --color-surface: var(--surface);
-  --color-dark: #FFFFFF;
-  --color-muted: var(--mu);
-  --color-border: var(--border);
-  --color-white: #FFFFFF;
-  
-  /* Sistema de espaciado UX (8px grid) */
-  --space-xs: 0.5rem;   /* 8px */
-  --space-sm: 0.75rem;  /* 12px */
-  --space-md: 1rem;     /* 16px */
-  --space-lg: 1.5rem;   /* 24px */
-  --space-xl: 2rem;     /* 32px */
-  --space-2xl: 3rem;    /* 48px */
+  /* Compatibilidad Legacy */
+  --dkd: var(--bg-deep);
+  --bd: var(--border);
 }
 
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background: var(--bg-deep);
-  color: var(--text-white);
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* ACCESIBILIDAD: Foco visible para navegación por teclado */
-:focus-visible {
-  outline: 2px solid var(--o);
-  outline-offset: 4px;
-}
-
-/* Región ARIA-Live para anuncios globales */
-#aria-live-announcer {
-  position: absolute;
-  width: 1px;
-  height: 1px;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-deep) !important;
+  color: var(--text-main) !important;
+  margin: 0;
   padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
 }
 
-h1, h2, h3, .htitle {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: #fff;
+/* Forzar contraste en secciones y tarjetas */
+.section, .screen { background-color: var(--bg-deep); }
+.section-surface { background-color: var(--surface) !important; color: var(--text-main) !important; }
+.card, .pc, .lc, .review-card, .plan-card, .stat-card, .wait-card, .sumb, .of, .trust { 
+  background-color: var(--surface-2) !important; 
+  color: var(--text-main) !important;
+  border: 1px solid var(--border) !important;
 }
 
-/* Secciones con contraste garantizado (UX Layering) */
-.section-surface {
-  background: var(--surface);
-  color: var(--text-white);
-  padding: var(--space-2xl) 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
+/* Texto que debe ser siempre visible */
+h1, h2, h3, h4, .htitle, .ph-name, .bc-num, .nav-t { color: #FFFFFF !important; }
+p, .lead, .hsub, .mu, .sl { color: var(--mu) !important; }
 
-.section-surface h2, .section-surface h3 { color: #FFFFFF; }
-.section-surface p, .section-surface .lead { color: var(--mu); }
-
-/* Card con elevación sutil para evitar blanco sobre blanco */
-.card-premium {
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: var(--space-lg);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-}
-
-/* Botón Social de Google (Contraste garantizado v12.3.1) */
+/* Botón Google Auth v12.3.1 (Asegurar visibilidad) */
 .btn-google-auth {
-  background: #FFFFFF !important;
+  background-color: #FFFFFF !important;
   color: #1F1F1F !important;
   border: 1px solid #DADCE0 !important;
-  padding: 12px 24px !important;
-  border-radius: 12px !important;
-  font-weight: 600 !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 12px !important;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
-  cursor: pointer;
-  transition: all 0.2s;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
-.btn-google-auth:hover {
-  background: #F8F9FA !important;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+
+/* Tag de versión al final de la página */
+.mm-version-tag {
+  text-align: center;
+  font-size: 10px;
+  color: rgba(255,255,255,0.2);
+  padding: 20px;
+  font-family: 'Space Grotesk', sans-serif;
+  pointer-events: none;
 }
 
 /* Botones con Touch Targets de 44px */
@@ -2631,18 +2585,18 @@ function ocultarSplashManual() {
       alert('Firebase no está disponible. Recarga la página o intenta más tarde.');
       return;
     }
-    if(!role) role = 'cliente'; // fallback
+    if(!role) role = 'cliente';
 
     var loader = document.getElementById('loading-overlay');
     var msg = document.getElementById('load-msg');
-    loader.classList.add('show');
-    msg.textContent = 'Conectando de forma segura con Google...';
+    if(loader) loader.classList.add('show');
+    if(msg) msg.textContent = 'Conectando de forma segura con Google...';
 
     try {
       var result = await signInWithPopup(fbAuth, googleProvider);
       var user = result.user;
 
-      msg.textContent = 'Verificando tu cuenta...';
+      if(msg) msg.textContent = 'Verificando tu cuenta...';
 
       var res = await fetch('/api/auth', {
         method: 'POST',
@@ -2653,26 +2607,25 @@ function ocultarSplashManual() {
           foto: user.photoURL || '',
           uid: user.uid,
           provider: providerName.toLowerCase(),
-          role: role  // v10.7: rol pre-asignado
+          role: role
         })
       });
 
       var data = await res.json();
-      loader.classList.remove('show');
 
-      if(data.success && data.exists) {
-        // Usuario existente — login directo
+      if(data.success && data.exists && data.profile && data.profile.id) {
+        // LOGIN DIRECTO — Solo si tiene ID
         if(data.role === 'pro') {
-          localStorage.setItem('mm_miPerfil', JSON.stringify(data.profile));
-          alert('¡Bienvenido de nuevo, ' + data.profile.nombre.split(' ')[0] + '! 👋');
+          saveLocal('miPerfil', data.profile);
+          toast('¡Bienvenido de nuevo, ' + data.profile.nombre.split(' ')[0] + '! 👋');
           go('dash');
         } else {
-          localStorage.setItem('mm_miCliente', JSON.stringify(data.profile));
-          alert('¡Bienvenido de nuevo, ' + data.profile.nombre.split(' ')[0] + '! 👋');
+          saveLocal('miCliente', data.profile);
+          toast('¡Bienvenido de nuevo, ' + data.profile.nombre.split(' ')[0] + '! 👋');
           go('perfil-cli');
         }
       } else {
-        // Usuario nuevo — pre-llenar el formulario actual con sus datos
+        // REGISTRO — Pre-llenar formulario
         window.tempSocialUser = data.prefill || {
           email: user.email,
           nombre: user.displayName || 'Usuario',
@@ -2680,29 +2633,37 @@ function ocultarSplashManual() {
           uid: user.uid,
           role: role
         };
-        // Pre-llenar campos según el rol
+
         if(role === 'pro') {
-          var rn = document.getElementById('rn');
-          var re = document.getElementById('re');
-          if(rn && !rn.value) rn.value = window.tempSocialUser.nombre;
-          if(re && !re.value) re.value = window.tempSocialUser.email;
-          alert('✓ Conectado con Google.\n\nCompleta los datos restantes (oficio, comuna, certificaciones) para activar tu perfil profesional.');
+          go('registro');
+          setTimeout(() => {
+            var rn = document.getElementById('rn');
+            var re = document.getElementById('re');
+            if(rn) rn.value = window.tempSocialUser.nombre;
+            if(re) re.value = window.tempSocialUser.email;
+            toast('✓ Conectado con Google. Completa tu perfil.');
+          }, 500);
         } else {
-          var rcn = document.getElementById('rcn');
-          var rce = document.getElementById('rce');
-          if(rcn && !rcn.value) rcn.value = window.tempSocialUser.nombre;
-          if(rce && !rce.value) rce.value = window.tempSocialUser.email;
-          alert('✓ Conectado con Google.\n\nCompleta tu fecha de nacimiento y comuna para terminar el registro.');
+          go('registro-cli');
+          setTimeout(() => {
+            var rcn = document.getElementById('rcn');
+            var rce = document.getElementById('rce');
+            if(rcn) rcn.value = window.tempSocialUser.nombre;
+            if(rce) rce.value = window.tempSocialUser.email;
+            toast('✓ Conectado con Google. Completa tu registro.');
+          }, 500);
         }
       }
     } catch(error) {
-      loader.classList.remove('show');
       console.error('[MM] Login social error:', error);
       if(error.code !== 'auth/popup-closed-by-user' && error.code !== 'auth/cancelled-popup-request'){
         alert('No pudimos conectar con ' + providerName + '. Intenta de nuevo.');
       }
+    } finally {
+      if(loader) loader.classList.remove('show');
     }
   };
+
 </script>
 
 <script>
